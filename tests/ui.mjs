@@ -27,8 +27,10 @@ async function newPage(viewport) {
 }
 const shot = async (page, name) => { if (shots) await page.screenshot({ path: path.join(shots, name + '.png'), fullPage: false }); };
 async function noHScroll(page, label) {
-  const w = await page.evaluate(() => [document.documentElement.scrollWidth, window.innerWidth]);
-  ok(w[0] <= w[1], label + ': horizontal scroll (' + w[0] + ' > ' + w[1] + ')');
+  const w = await page.evaluate(() => [document.documentElement.scrollWidth, window.innerWidth,
+    [...document.querySelectorAll('#app *, #toast-root *')].filter(e => e.getBoundingClientRect().right > window.innerWidth + 1 && !e.closest('.code, .lb-wrap, .table-scroll, .term, .opt .txt'))
+      .slice(0, 4).map(e => e.tagName.toLowerCase() + '.' + String(e.className).replace(/ /g, '.') + '→' + Math.round(e.getBoundingClientRect().right)).join(', ')]);
+  ok(w[0] <= w[1], label + ': horizontal scroll (' + w[0] + ' > ' + w[1] + ') ' + w[2]);
 }
 // Click the correct answer for the current question through the real UI.
 async function answer(page, correct) {

@@ -1,0 +1,10 @@
+{
+  "name": "python-quest",
+  "private": true,
+  "type": "module",
+  "description": "Python Quest – Escape the Coding Lab: an interactive Python learning game with a class leaderboard.",
+  "engines": { "node": "22.x" },
+  "dependencies": {
+    "@neondatabase/serverless": "1.1.0"
+  }
+}

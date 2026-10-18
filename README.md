@@ -3,7 +3,8 @@
 An interactive browser game that teaches Grade 7–8 ICT students the basics of Python before their exam:
 `print()`, `input()`, variables, `if / else` and `if / elif / else`.
 
-**To play:** open `index.html` in any modern browser. Everything is in that one file. You don't need Python, a server, an account or an internet connection (without internet the fonts fall back to system fonts).
+**Play online:** deployed on Vercel with a live class leaderboard (see below).
+**To play offline:** open `index.html` in any modern browser. Everything is in that one file. You don't need Python, a server, an account or an internet connection (without internet the fonts fall back to system fonts).
 
 ## What's inside
 
@@ -18,6 +19,16 @@ An interactive browser game that teaches Grade 7–8 ICT students the basics of 
 - **Code Lab:** write and run your own programs, answer `input()` prompts, and step through them line by line.
 - **Progress is saved** in the browser's local storage. Settings include a teacher preview mode that unlocks everything for classroom demos, and a progress reset.
 
+## Leaderboard (online version)
+
+When the game is served from Vercel, students who enter a first name (and optionally a class code such as `7B`) appear on a shared leaderboard. They can opt out on the start screen or in Settings.
+
+- Students are ranked by **final score**: half their average best mission score and half their best exam score. Students who have not taken the exam yet are ranked by mastery, then stars, then XP. The leaderboard can show all students or a single class.
+- `api/leaderboard.js` is a Vercel serverless function backed by Neon Postgres (table `players`). Each browser gets an anonymous random ID, scores only ever go up, inputs are validated, and names with offensive words are rejected.
+- **Teacher tools:** open the leaderboard, expand *Teacher tools* and enter the teacher key to remove entries.
+- Environment variables: `DATABASE_URL` (Neon connection string) and `ADMIN_KEY` (the teacher key).
+- Opened from a file or another host, the game works fully offline and the leaderboard screen explains that it needs the online version.
+
 ## How answers are checked
 
 The game includes **PyLite**, a small Python interpreter written in JavaScript (no `eval`). It runs every example and question, so expected outputs, the line where each bug is reported, and the step-by-step explanations are all calculated rather than typed in by hand. It reports Python-style errors such as `SyntaxError: expected ':'`, `IndentationError`, `NameError` and `TypeError`.
@@ -27,6 +38,7 @@ The game includes **PyLite**, a small Python interpreter written in JavaScript (
 ```bash
 node tests/validate.mjs                              # question bank + differential test against real Python 3
 NODE_PATH=$(npm root -g) node tests/ui.mjs           # full playthrough in Chromium (needs Playwright)
+BASE=http://localhost:3000 ADMIN_KEY=... NODE_PATH=$(npm root -g) node tests/leaderboard.mjs   # leaderboard, against `vercel dev`
 ```
 
 `validate.mjs` checks every question, follow-up, generator and lesson. It confirms that each one has exactly one correct answer, that every wrong option has an explanation, that bug lines match where Python reports the error, and that the suggested fixes run. It then runs about 2,500 programs through both PyLite and CPython and requires identical output, error type and error line.

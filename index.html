@@ -21,7 +21,7 @@
   --cyan:#29e6ff; --blue:#3f8cff; --green:#43f5a5; --amber:#ffcc4d; --red:#ff5d7d;
   --cyan-a:rgba(41,230,255,.14); --blue-a:rgba(63,140,255,.16); --green-a:rgba(67,245,165,.14);
   --amber-a:rgba(255,204,77,.15); --red-a:rgba(255,93,125,.14); --shade:rgba(2,6,12,.72);
-  --ink:#03101a;
+  --ink:#03101a; --silver:#c9d6e6; --bronze:#d9935a;
   --t-kw:#5fb3ff; --t-fn:#29e6ff; --t-str:#7dffb7; --t-num:#ffcc4d; --t-com:#5f7896; --t-op:#c8d7ea; --t-id:#e2eefb;
   --font-display:"Chakra Petch","Segoe UI",system-ui,sans-serif;
   --font-body:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
@@ -81,7 +81,7 @@ button,select,input,textarea{-webkit-tap-highlight-color:transparent}
 /* HUD */
 .hud{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:linear-gradient(180deg,rgba(5,11,20,.96),rgba(5,11,20,.86));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .hud-in{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px;display:flex;align-items:center;gap:14px}
-.brand{display:flex;align-items:center;gap:10px;background:none;border:0;cursor:pointer;padding:4px 0;min-width:0}
+.brand{display:flex;align-items:center;gap:10px;background:none;border:0;cursor:pointer;padding:4px 0;min-width:0;flex:none}
 .brand-mark{font-family:var(--font-mono);font-weight:700;color:var(--ink);background:var(--green);padding:3px 7px;border-radius:7px;font-size:.85rem;box-shadow:0 0 18px -4px var(--green)}
 .brand-name{font-family:var(--font-display);font-weight:700;font-size:1.15rem;letter-spacing:.04em;white-space:nowrap}
 .brand-name span{color:var(--cyan)}
@@ -99,6 +99,31 @@ button,select,input,textarea{-webkit-tap-highlight-color:transparent}
 .pill.amber .ic{color:var(--amber)}
 .pill.green .ic{color:var(--green)}
 .pill.flame .ic{color:var(--amber)}
+.lb-tabs{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.lb-wrap{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);overflow-x:auto}
+.lb{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.lb th,.lb td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+.lb th{font:600 .72rem var(--font-display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);background:var(--bg-2)}
+.lb td.num,.lb th.num{text-align:right;font-family:var(--font-mono)}
+.lb td.nm{font-weight:700;max-width:220px;overflow:hidden;text-overflow:ellipsis}
+.lb tr:last-child td{border-bottom:0}
+.lb tr.me td{background:var(--cyan-a)}
+.lb tr.me td.nm::after{content:" (you)";font-weight:400;color:var(--cyan)}
+.rk{display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 6px;border-radius:9px;font:700 .95rem var(--font-mono);background:var(--panel-3);color:var(--muted)}
+.rk.r1{background:var(--amber);color:var(--ink);box-shadow:0 0 16px -4px var(--amber)}
+.rk.r2{background:var(--silver);color:var(--ink)}
+.rk.r3{background:var(--bronze);color:var(--ink)}
+.lb .sc{font-family:var(--font-display);font-weight:700;font-size:1.1rem;color:var(--green)}
+.lb .dim{color:var(--dim)}
+.podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.podium .p{border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,var(--panel-2),var(--panel));padding:16px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.podium .p b{font-family:var(--font-display);font-size:1.2rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.podium .p .big{font:700 2rem var(--font-display);color:var(--green)}
+.podium .p small{color:var(--muted)}
+.podium .p.g{border-color:var(--amber)}.podium .p.s{border-color:var(--silver)}.podium .p.b{border-color:var(--bronze)}
+.notice{border:1px solid rgba(255,204,77,.45);background:var(--amber-a);border-radius:var(--r);padding:14px 16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.check-row{display:flex;gap:10px;align-items:flex-start;font-size:.95rem;color:var(--muted)}
+.check-row input{width:20px;height:20px;margin-top:2px;accent-color:var(--cyan);flex:none}
 .teacher-tag{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);border:1px solid rgba(255,204,77,.4);padding:2px 8px;border-radius:999px}
 
 /* Intro */
@@ -533,6 +558,11 @@ select.input{font-family:var(--font-body);font-weight:400;cursor:pointer}
   .compare,.cols2,.match{grid-template-columns:minmax(0,1fr)}
   .bar-row{grid-template-columns:minmax(0,1fr) 52px}
   .bar-row .bar{grid-column:1/-1;grid-row:2}
+  .lb .hide-sm{display:none}
+  .lb th,.lb td{padding:10px 7px}
+  .lb th{letter-spacing:.06em}
+  .lb td.nm{max-width:110px}
+  .podium{grid-template-columns:minmax(0,1fr)}
   .actions .btn{flex:1}
   .actions .grow{margin-right:0;flex-basis:100%}
   .trow{grid-template-columns:minmax(0,1fr)}
@@ -541,6 +571,11 @@ select.input{font-family:var(--font-body);font-weight:400;cursor:pointer}
 }
 @media (max-width:480px){
   .brand-name{display:none}
+  .hud-stats{gap:4px}
+  .hud .icon-btn{width:36px;height:36px}
+  .hud .pill{padding:0 8px;gap:4px}
+  .brand-mark{padding:3px 5px}
+  .teacher-tag{display:none}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
@@ -2495,10 +2530,14 @@ const LAB_EXAMPLES = [
 ];
 
 /* ---------- state ---------- */
+function newPid() {
+  try { if (crypto.randomUUID) return crypto.randomUUID(); } catch (e) { /* fall back below */ }
+  return Array.from({ length: 4 }, () => Math.random().toString(16).slice(2, 10).padEnd(8, '0')).join('-');
+}
 function defaults() {
   const missions = {}, topic = {};
   for (const m of MISSIONS) { missions[m.n] = { done: false, stars: 0, best: 0, last: null, plays: 0 }; topic[m.key] = { c: 0, t: 0 }; }
-  return { v: 1, name: '', started: false, xp: 0, sound: true, teacher: false, missions, topic, tags: {}, seen: {}, counter: 0, bugs: 0, bestStreak: 0,
+  return { v: 1, pid: newPid(), cls: '', lbOn: true, name: '', started: false, xp: 0, sound: true, teacher: false, missions, topic, tags: {}, seen: {}, counter: 0, bugs: 0, bestStreak: 0,
     answered: 0, correct: 0, badges: {}, exam: { best: null, attempts: 0, last: null, cur: null }, lab: null };
 }
 function load() {
@@ -2508,6 +2547,7 @@ function load() {
     const s = JSON.parse(raw); if (!s || s.v !== 1) return d;
     const out = Object.assign({}, d, s);
     out.missions = Object.assign({}, d.missions, s.missions); out.topic = Object.assign({}, d.topic, s.topic); out.exam = Object.assign({}, d.exam, s.exam);
+    if (!s.pid) out.pid = d.pid;
     return out;
   } catch (e) { return d; }
 }
@@ -2551,6 +2591,7 @@ const IC = {
   replay: '<path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><path d="M4 3.8v4.6h4.6" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>',
   bulb: '<path d="M9 18h6M10 21h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1 2V16h5.2v-.2c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/>',
   steps: '<path d="M4 6h4v4H4zM10 11h4v4h-4zM16 16h4v4h-4z"/><path d="M8 8h3v3M14 13h3v3" fill="none" stroke="currentColor" stroke-width="1.8"/>',
+  trophy: '<path d="M7 4h10v4.5a5 5 0 0 1-10 0z"/><path d="M7 6H4.5a2.5 2.5 0 0 0 2.5 4M17 6h2.5a2.5 2.5 0 0 1-2.5 4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 14h3v3.5h-3zM8 19.5h8v1.5H8z"/>',
   key: '<rect x="2" y="6" width="20" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 15h10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>'
 };
 const icon = (n, cls) => '<svg class="ic ' + (cls || '') + '" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">' + IC[n] + '</svg>';
@@ -2809,6 +2850,7 @@ function hud() {
     '<div class="hud-stats"><div class="hud-rank"><div class="top"><span class="who">' + esc(S.name || 'Agent') + '</span><span class="rank">' + r.name + '</span></div><div class="xpbar" title="' + (r.next ? (r.next - S.xp) + ' XP to the next rank' : 'Top rank') + '"><i style="width:' + r.pct + '%"></i></div></div>' +
     '<div class="pill" title="Experience points">' + icon('bolt') + '<b>' + S.xp + '</b><span>XP</span></div>' +
     '<div class="pill amber" title="Stars">' + icon('star') + '<b>' + totalStars() + '</b><span>/15</span></div>' +
+    '<button type="button" class="icon-btn" data-act="leaderboard" aria-label="Leaderboard" title="Leaderboard">' + icon('trophy') + '</button>' +
     '<button type="button" class="icon-btn" data-act="report" aria-label="Performance report" title="Performance report">' + icon('chart') + '</button>' +
     '<button type="button" class="icon-btn" data-act="settings" aria-label="Settings" title="Settings">' + icon('gear') + '</button></div></div></header>';
 }
@@ -2817,7 +2859,9 @@ function vIntro() {
     '<p class="eyebrow">ICT · Grade 7–8 · Python</p><h1 class="title-xl"><span class="py">Python</span> Quest</h1><p class="title-sub">Escape the Coding Lab</p>' +
     '<p class="lead">The lab doors have locked and the only way out is through code. Clear five rooms, defeat The Glitch, then pass the Escape Protocol exam.</p>' +
     '<div class="rooms-strip">' + MISSIONS.map(m => '<div><b>' + esc(m.concept) + '</b>' + esc(m.title) + '</div>').join('') + '</div>' +
-    '<form class="stack" data-form="intro"><div class="field"><label for="agent-name">Agent name (optional)</label><input class="input" id="agent-name" maxlength="20" autocomplete="off" placeholder="e.g. Nova" value="' + esc(S.name) + '"></div>' +
+    '<form class="stack" data-form="intro"><div class="row" style="align-items:flex-start"><div class="field" style="flex:2;min-width:200px"><label for="agent-name">Your first name</label><input class="input" id="agent-name" maxlength="20" autocomplete="off" placeholder="e.g. Nova" value="' + esc(S.name) + '"></div>' +
+    '<div class="field" style="flex:1;min-width:130px"><label for="agent-class">Class (optional)</label><input class="input" id="agent-class" maxlength="12" autocomplete="off" placeholder="e.g. 7B" value="' + esc(S.cls) + '"></div></div>' +
+    '<label class="check-row"><input type="checkbox" id="agent-lb"' + (S.lbOn ? ' checked' : '') + '><span>Show my first name and scores on the class leaderboard. Use your first name only, never your full name.</span></label><p id="intro-err" style="color:var(--red)" hidden></p>' +
     '<div class="row"><button class="btn primary" type="submit">' + icon('play') + ' Enter the lab</button></div></form>' +
     '<p class="muted" style="font-size:.92rem">Progress is saved in this browser on this device.</p></div></section></div>';
 }
@@ -2863,7 +2907,7 @@ function vMap() {
   const badges = '<div class="section-title"><h2>Badges</h2><button type="button" class="btn ghost sm" data-act="report">' + icon('chart') + ' Performance report</button></div><div class="badges">' +
     BADGES.map(b => '<div class="badge' + (S.badges[b.id] ? '' : ' off') + '">' + hexBadge(b, !!S.badges[b.id]) + '<b>' + esc(b.name) + '</b><small>' + esc(b.desc) + '</small></div>').join('') + '</div>';
   return '<div class="wrap"><section class="hero"><div><p class="eyebrow">Mission control' + (S.name ? ' · Agent ' + name : '') + '</p><h1>' + h1 + '</h1><p class="lead">' + lead + '</p><div class="row">' + cta +
-    '<button type="button" class="btn ghost" data-act="lab">' + icon('term') + ' Code Lab</button></div></div>' + term + '</section>' +
+    '<button type="button" class="btn ghost" data-act="lab">' + icon('term') + ' Code Lab</button><button type="button" class="btn ghost" data-act="leaderboard">' + icon('trophy') + ' Leaderboard</button></div></div>' + term + '</section>' +
     progress + '<div class="map-head"><h2>Mission map</h2><span class="muted">' + totalStars() + ' of 15 stars collected</span></div><ol class="spine">' + MISSIONS.map(stopCard).join('') + examStop() + '</ol>' + badges + '</div>';
 }
 
@@ -3029,6 +3073,87 @@ function vReport() {
     '<div class="actions"><button type="button" class="btn ghost grow" data-act="home">' + icon('back') + ' Mission map</button>' + (S.exam.last ? '<button type="button" class="btn ghost" data-act="exam-result">Last exam results</button>' : '') + '</div></section></div>';
 }
 
+/* ----- leaderboard ----- */
+const LB = { data: null, loading: false, err: '', cls: null, admin: '', syncErr: '', timer: null };
+const NAME_OK = /^[\p{L}\p{N} .'-]{1,20}$/u, CLASS_OK = /^[A-Z0-9-]{0,12}$/;
+const lbOnline = () => /^https?:$/.test(location.protocol) && !/(^|\.)claude\.(ai|site)$|claudeusercontent/.test(location.hostname);
+const cleanName = v => String(v || '').normalize('NFKC').replace(/\s+/g, ' ').trim().slice(0, 20);
+const cleanClass = v => String(v || '').trim().toUpperCase().replace(/\s+/g, '').slice(0, 12);
+function lbPayload() {
+  const done = MISSIONS.filter(m => S.missions[m.n].done).length;
+  return { id: S.pid, name: S.name, classCode: S.cls, mastery: Math.round(MISSIONS.reduce((a, m) => a + S.missions[m.n].best, 0) / 5 * 100), missionsDone: done,
+    stars: totalStars(), xp: Math.min(S.xp, 50000), badges: Object.keys(S.badges).length, bestExam: done === 5 && S.exam.best != null ? S.exam.best : null };
+}
+function lbWhyNot() {
+  if (!lbOnline()) return 'The leaderboard works when the game is opened from its website.';
+  if (!S.lbOn) return 'You chose not to appear on the leaderboard. You can join in Settings.';
+  if (!S.name) return 'Add your first name in Settings to join the leaderboard.';
+  if (!NAME_OK.test(S.name)) return 'Your name can only use letters, numbers, spaces, dots, hyphens or apostrophes. Change it in Settings.';
+  if (S.teacher) return 'Teacher preview is on, so your scores are not sent to the leaderboard.';
+  return '';
+}
+function lbSync(now) {
+  if (lbWhyNot()) return;
+  clearTimeout(LB.timer);
+  LB.timer = setTimeout(async () => {
+    try {
+      const r = await fetch('/api/leaderboard', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(lbPayload()) });
+      const j = await r.json().catch(() => ({}));
+      LB.syncErr = r.ok ? '' : (j.error || 'Your scores could not be saved to the leaderboard.');
+      if (R.screen === 'leaderboard') lbLoad();
+    } catch (e) { LB.syncErr = 'You seem to be offline, so the leaderboard was not updated.'; }
+  }, now ? 0 : 400);
+}
+async function lbLoad() {
+  if (!lbOnline()) { LB.err = 'offline'; if (R.screen === 'leaderboard') render(); return; }
+  if (LB.cls == null) LB.cls = S.cls || '';
+  LB.loading = true;
+  try {
+    const q = new URLSearchParams({ class: LB.cls, me: S.pid });
+    const r = await fetch('/api/leaderboard?' + q, { headers: LB.admin ? { 'x-admin-key': LB.admin } : {} });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.error || 'The leaderboard is unavailable right now.');
+    LB.data = j; LB.err = '';
+  } catch (e) { LB.err = e.message || 'The leaderboard is unavailable right now.'; }
+  LB.loading = false;
+  if (R.screen === 'leaderboard' && !R.modal) render();
+}
+function vLeaderboard() {
+  const why = lbWhyNot(), d = LB.data, cls = LB.cls || '';
+  let body;
+  if (LB.err === 'offline') body = '<div class="box"><h3>Leaderboard offline</h3><p class="muted">The leaderboard needs the online version of the game. Your own progress is still saved on this device, and the Performance report shows your scores.</p></div>';
+  else if (LB.err) body = '<div class="box"><h3>Could not load the leaderboard</h3><p class="muted">' + esc(LB.err) + '</p><div><button type="button" class="btn sm" data-act="lb-refresh">' + icon('replay') + ' Try again</button></div></div>';
+  else if (!d) body = '<div class="box"><p class="muted">Loading the leaderboard…</p></div>';
+  else if (!d.players.length) body = '<div class="box"><h3>No students here yet</h3><p class="muted">' + (cls ? 'Nobody in class ' + esc(cls) + ' has joined yet. ' : '') + 'Clear a room to put your name on the board.</p></div>';
+  else {
+    const top = d.players.filter(p => p.rank <= 3).slice(0, 3);
+    const score = p => p.questScore != null ? '<span class="sc">' + p.questScore + '</span>' : '<span class="dim" title="Take the final exam to get a final score">–</span>';
+    const podium = top.length === 3 ? '<div class="podium">' + top.map((p, i) => '<div class="p ' + ['g', 's', 'b'][i] + '"><small>' + ['1st place', '2nd place', '3rd place'][i] + (p.classCode ? ' · ' + esc(p.classCode) : '') + '</small><b>' + esc(p.name) + '</b>' +
+      (p.questScore != null ? '<span class="big">' + p.questScore + '</span><small>Final score / 100</small>' : '<span class="big">' + p.mastery + '%</span><small>Mission mastery · ' + p.stars + ' stars</small>') + '</div>').join('') + '</div>' : '';
+    const admin = !!LB.admin && d.players.some(p => p.id);
+    const rows = d.players.map(p => '<tr class="' + (p.me ? 'me' : '') + '"><td><span class="rk' + (p.rank <= 3 ? ' r' + p.rank : '') + '">' + p.rank + '</span></td><td class="nm">' + esc(p.name) + '</td>' +
+      '<td class="hide-sm">' + (esc(p.classCode) || '<span class="dim">–</span>') + '</td><td class="num">' + score(p) + '</td><td class="num hide-sm">' + (p.bestExam != null ? p.bestExam : '<span class="dim">–</span>') + '</td>' +
+      '<td class="num">' + p.mastery + '%</td><td class="num">' + p.stars + '<span class="dim hide-sm">/15</span></td><td class="num hide-sm">' + p.xp + '</td>' +
+      (admin ? '<td>' + (p.id ? '<button type="button" class="btn danger sm" data-act="lb-del" data-id="' + esc(p.id) + '" data-n="' + esc(p.name) + '">Remove</button>' : '') + '</td>' : '') + '</tr>').join('');
+    const meOutside = d.players.find(p => p.me && p.rank > 100);
+    body = podium + '<div class="lb-wrap"><table class="lb"><thead><tr><th>Rank</th><th>Student</th><th class="hide-sm">Class</th><th class="num"><span class="hide-sm">Final </span>score</th><th class="num hide-sm">Best exam</th><th class="num">Mastery</th><th class="num">Stars</th><th class="num hide-sm">XP</th>' + (admin ? '<th></th>' : '') + '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
+      '<p class="muted" style="font-size:.9rem">' + d.total + ' student' + (d.total === 1 ? '' : 's') + (cls ? ' in class ' + esc(cls) : ' in total') + (meOutside ? '. You are ranked ' + meOutside.rank + '.' : '.') + '</p>';
+  }
+  const classes = d && d.classes ? d.classes : [];
+  const tabs = '<div class="lb-tabs" role="group" aria-label="Choose a class"><button type="button" class="chipbtn' + (!cls ? ' on' : '') + '" data-act="lb-class" data-c="">All students</button>' +
+    (S.cls && !classes.some(c => c.code === S.cls) ? '<button type="button" class="chipbtn' + (cls === S.cls ? ' on' : '') + '" data-act="lb-class" data-c="' + esc(S.cls) + '">My class · ' + esc(S.cls) + '</button>' : '') +
+    classes.map(c => '<button type="button" class="chipbtn' + (cls === c.code ? ' on' : '') + '" data-act="lb-class" data-c="' + esc(c.code) + '">' + (c.code === S.cls ? 'My class · ' : '') + esc(c.code) + '</button>').join('') +
+    '<button type="button" class="btn ghost sm" data-act="lb-refresh" style="margin-left:auto">' + icon('replay') + ' Refresh</button></div>';
+  return hud() + '<div class="wrap"><section class="brief" style="max-width:1040px"><p class="eyebrow">Hall of fame</p><h2>Leaderboard</h2>' +
+    '<p class="muted" style="max-width:72ch;font-size:1.02rem">Students are ranked by their <b>final score</b>: half their average mission mastery and half their best exam score. Students who have not taken the exam yet are ranked by mastery, then stars, then XP.</p>' +
+    (why && LB.err !== 'offline' ? '<div class="notice"><span>' + esc(why) + '</span>' + (lbOnline() ? '<button type="button" class="btn sm" data-act="settings">' + icon('gear') + ' Settings</button>' : '') + '</div>' : '') +
+    (LB.syncErr && !why ? '<div class="notice"><span>' + esc(LB.syncErr) + '</span></div>' : '') +
+    (LB.err === 'offline' ? '' : tabs) + body +
+    (lbOnline() ? '<details class="box"' + (LB.admin ? ' open' : '') + '><summary class="subhead" style="cursor:pointer">Teacher tools</summary><form class="row" data-form="lb-admin" style="margin-top:12px"><label class="sr" for="lb-key">Teacher key</label><input class="input" id="lb-key" type="password" autocomplete="off" placeholder="Teacher key" style="flex:1;min-width:180px" value="' + esc(LB.admin) + '"><button class="btn sm" type="submit">Unlock</button></form>' +
+      '<p class="muted" style="font-size:.9rem">With the teacher key you can remove entries, for example an unsuitable name. ' + (LB.admin && d && d.players.length && !d.players.some(p => p.id) ? '<b style="color:var(--red)">That key was not accepted.</b>' : '') + '</p></details>' : '') +
+    '<div class="actions"><button type="button" class="btn ghost grow" data-act="home">' + icon('back') + ' Mission map</button></div></section></div>';
+}
+
 /* ----- code lab ----- */
 function vLab() {
   const Lb = R.lab;
@@ -3100,9 +3225,11 @@ function vTrace(md) {
 }
 function vSettings() {
   return '<div class="overlay" data-act="overlay"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="set-h"><div class="modal-head"><h3 id="set-h">Settings</h3><button type="button" class="icon-btn" data-act="close" aria-label="Close">' + icon('x') + '</button></div>' +
-    '<form class="field" data-form="name"><label for="set-name">Agent name</label><div class="row"><input class="input" id="set-name" maxlength="20" autocomplete="off" value="' + esc(S.name) + '" style="flex:1;min-width:160px"><button class="btn sm" type="submit">Save</button></div></form>' +
+    '<form class="stack" style="gap:10px" data-form="name"><div class="row" style="align-items:flex-end"><div class="field" style="flex:2;min-width:150px"><label for="set-name">First name</label><input class="input" id="set-name" maxlength="20" autocomplete="off" value="' + esc(S.name) + '"></div>' +
+    '<div class="field" style="flex:1;min-width:100px"><label for="set-class">Class</label><input class="input" id="set-class" maxlength="12" autocomplete="off" placeholder="e.g. 7B" value="' + esc(S.cls) + '"></div><button class="btn sm" type="submit">Save</button></div><p id="set-err" style="color:var(--red)" hidden></p></form>' +
+    '<div class="toggle"><div><b>Join the leaderboard</b><small>Shares your first name, class and scores with everyone who plays.</small></div><button type="button" class="switch" role="switch" aria-checked="' + S.lbOn + '" data-act="toggle-lb" aria-label="Join the leaderboard"></button></div>' +
     '<div class="toggle"><div><b>Sound effects</b><small>Short beeps for right and wrong answers.</small></div><button type="button" class="switch" role="switch" aria-checked="' + S.sound + '" data-act="toggle-sound" aria-label="Sound effects"></button></div>' +
-    '<div class="toggle"><div><b>Teacher preview</b><small>Unlocks every room and the exam, for demonstrating in class.</small></div><button type="button" class="switch" role="switch" aria-checked="' + S.teacher + '" data-act="toggle-teacher" aria-label="Teacher preview"></button></div>' +
+    '<div class="toggle"><div><b>Teacher preview</b><small>Unlocks every room and the exam, for demonstrating in class. Scores are not sent to the leaderboard while it is on.</small></div><button type="button" class="switch" role="switch" aria-checked="' + S.teacher + '" data-act="toggle-teacher" aria-label="Teacher preview"></button></div>' +
     '<div class="toggle"><div><b>Reset all progress</b><small>Deletes XP, stars, badges and exam results on this device.</small></div><button type="button" class="btn danger sm" data-act="reset">Reset</button></div></div></div>';
 }
 function vConfirm(md) {
@@ -3137,6 +3264,7 @@ function render() {
     case 'examResult': html = vExamResult(); break;
     case 'report': html = vReport(); break;
     case 'lab': html = vLab(); break;
+    case 'leaderboard': html = vLeaderboard(); break;
     default: html = hud() + vMap();
   }
   app.innerHTML = html;
@@ -3244,6 +3372,7 @@ function finishMission() {
   if (pass) { st.done = true; st.stars = Math.max(st.stars, stars); award(m.badge); if (stars === 3) award('perfectionist'); }
   run.result = { pct, pass, stars };
   save();
+  lbSync();
   R.screen = 'result'; render(); window.scrollTo(0, 0);
   if (pass) { Sound.win(); confetti(); }
 }
@@ -3287,6 +3416,7 @@ function submitExam(auto) {
   if (score >= 60) award('escapee');
   if (score >= 90) award('exam-ace');
   save();
+  lbSync();
   R.screen = 'examResult'; R.modal = null; renderModal(); render(); window.scrollTo(0, 0);
   if (auto) toast('<div><b>Time is up</b><small>Your exam was submitted automatically.</small></div>');
   if (score >= 60) { Sound.win(); confetti(); }
@@ -3301,10 +3431,26 @@ const A = {
   overlay(el, e) { if (e.target === el && R.modal && R.modal.k !== 'confirm') closeModal(); },
   'confirm-yes'() { const f = R.modal && R.modal.onYes; closeModal(); if (f) f(); },
   'toggle-sound'() { S.sound = !S.sound; save(); renderModal(); },
+  'toggle-lb'() { S.lbOn = !S.lbOn; save(); renderModal(); if (S.lbOn) lbSync(true); if (R.screen === 'leaderboard') render(); },
+  leaderboard() { R.run = null; go('leaderboard'); lbLoad(); },
+  'lb-refresh'() { lbLoad(); },
+  'lb-class'(el) { LB.cls = el.dataset.c; LB.data = null; render(); lbLoad(); },
+  'lb-del'(el) {
+    const id = el.dataset.id, n = el.dataset.n;
+    confirmBox('Remove ' + n + '?', 'This deletes <b>' + esc(n) + '</b> from the leaderboard for everyone. If they keep playing, they reappear with their next score.', 'Remove', async () => {
+      try {
+        const r = await fetch('/api/leaderboard?id=' + encodeURIComponent(id), { method: 'DELETE', headers: { 'x-admin-key': LB.admin } });
+        const j = await r.json().catch(() => ({}));
+        toast('<div><b>' + (r.ok ? 'Removed' : 'Not removed') + '</b>' + (r.ok ? '' : '<small>' + esc(j.error || 'Try again.') + '</small>') + '</div>');
+      } catch (e) { toast('<div><b>Not removed</b><small>You seem to be offline.</small></div>'); }
+      lbLoad();
+    }, { danger: true });
+  },
+
   'toggle-teacher'() { S.teacher = !S.teacher; save(); renderModal(); render(); },
   reset() {
     confirmBox('Reset all progress?', 'This permanently deletes your XP, stars, badges and exam results on this device.', 'Delete everything', () => {
-      S = defaults(); save(); R.run = null; R.exam = null; R.review = null; go('intro');
+      const cls = S.cls; S = defaults(); S.cls = cls; save(); R.run = null; R.exam = null; R.review = null; go('intro');
     }, { danger: true, no: 'Keep my progress' });
   },
   start(el) {
@@ -3390,8 +3536,23 @@ const A = {
   'lab-trace'() { const Lb = R.lab; if (Lb.done && Lb.ranCode != null) openTrace(Lb.ranCode, Lb.inputs); }
 };
 const FORMS = {
-  intro() { const v = (document.getElementById('agent-name').value || '').trim().slice(0, 20); S.name = v; S.started = true; save(); go('map'); },
-  name() { S.name = (document.getElementById('set-name').value || '').trim().slice(0, 20); save(); closeModal(); render(); toast('<div><b>Name saved</b></div>'); },
+  intro() {
+    const name = cleanName(document.getElementById('agent-name').value), cls = cleanClass(document.getElementById('agent-class').value), on = document.getElementById('agent-lb').checked;
+    const err = name && !NAME_OK.test(name) ? 'Names can only use letters, numbers, spaces, dots, hyphens or apostrophes.'
+      : !CLASS_OK.test(cls) ? 'Class codes can only use letters, numbers or hyphens, like 7B.' : '';
+    const box = document.getElementById('intro-err');
+    if (err) { box.textContent = err; box.hidden = false; return; }
+    S.name = name; S.cls = cls; S.lbOn = on; S.started = true; save(); lbSync(true); go('map');
+  },
+  name() {
+    const name = cleanName(document.getElementById('set-name').value), cls = cleanClass(document.getElementById('set-class').value), box = document.getElementById('set-err');
+    const err = name && !NAME_OK.test(name) ? 'Names can only use letters, numbers, spaces, dots, hyphens or apostrophes.'
+      : !CLASS_OK.test(cls) ? 'Class codes can only use letters, numbers or hyphens, like 7B.' : '';
+    if (err) { box.textContent = err; box.hidden = false; return; }
+    S.name = name; S.cls = cls; LB.cls = null; save(); lbSync(true); closeModal(); render(); toast('<div><b>Saved</b></div>');
+  },
+  'lb-admin'() { LB.admin = (document.getElementById('lb-key').value || '').trim(); lbLoad(); },
+
   'lab-in'() { const inp = document.getElementById('lab-input'); const v = inp ? inp.value : ''; R.lab.inputs.push(v); labAdvance(v); }
 };
 function refocusSelector(el) {
@@ -3449,10 +3610,11 @@ document.addEventListener('keydown', e => {
 window.addEventListener('storage', e => { if (e.key === KEY && !R.run && !S.exam.cur) { S = load(); render(); } });
 
 // Expose for automated testing only.
-window.PQ = { get S() { return S; }, R, Core, PyLite, A };
+window.PQ = { get S() { return S; }, R, Core, PyLite, A, LB };
 
 if (S.exam.cur && Date.now() >= S.exam.cur.end) submitExam(true);
 else render();
+if (S.started) lbSync();
 })();
 </script>
 </body>
