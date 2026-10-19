@@ -3,257 +3,95 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Contact Moh Saleh: 079 613 8006">
-<title>Moh Saleh Card</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;1,6..96,500&family=Manrope:wght@400;600&family=JetBrains+Mono:wght@500&display=swap">
+<meta name="description" content="Call or WhatsApp Moh Saleh: 079 613 8006">
+<title>Moh Saleh</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;1,6..96,500&family=Manrope:wght@400;600;700&display=swap">
 <style>
-  html,body{margin:0} *{box-sizing:border-box}
-  /* Layout: one physical card (89 × 51 mm ratio) on a desk surface, flips to a QR back; actions sit under it. */
   :root {
-    --desk: #e7ebee;
-    --desk-ink: #1d2a31;
-    --muted: #5b6b74;
-    --card: #11303b;
-    --card-edge: #0b232c;
+    --bg: #11303b;
+    --fg: #e9eef0;
+    --muted: #9fb3bb;
     --foil: #d4b471;
-    --foil-hi: #f1dca4;
-    --on-card: #e9eef0;
-    --btn: #ffffff;
-    --btn-line: #c9d2d7;
-    --font-display: "Bodoni Moda", "Didot", Georgia, serif;
+    --call: #f1dca4;
+    --call-ink: #11303b;
+    --wa: #25d366;
+    --wa-ink: #07301a;
+    --font-display: "Bodoni Moda", Georgia, serif;
     --font-body: "Manrope", system-ui, sans-serif;
-    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    color-scheme: dark;
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --desk: #0d1418; --desk-ink: #e3e9ec; --muted: #8b9ba3;
-      --card: #163a46; --card-edge: #0a2129;
-      --btn: #16222a; --btn-line: #2b3c45; color-scheme: dark;
-    }
-  }
-  :root[data-theme="dark"] {
-    --desk: #0d1418; --desk-ink: #e3e9ec; --muted: #8b9ba3;
-    --card: #163a46; --card-edge: #0a2129;
-    --btn: #16222a; --btn-line: #2b3c45; color-scheme: dark;
-  }
-
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
   body {
-    background: var(--desk);
-    color: var(--desk-ink);
+    background: radial-gradient(120% 70% at 0% 0%, #1a4352, transparent 60%), var(--bg);
+    color: var(--fg);
     font-family: var(--font-body);
-    min-height: 100%;
   }
   main {
-    padding-block: 56px 48px;
-    padding-left: max(16px, env(safe-area-inset-left, 0px));
-    padding-right: max(16px, env(safe-area-inset-right, 0px));
-    display: grid;
-    justify-items: center;
-    gap: 28px;
-  }
-
-  .stage { width: min(520px, 100%); perspective: 1400px; }
-  .card {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 89 / 51;
-    max-width: 100%;
-    transform-style: preserve-3d;
-    transition: transform .8s cubic-bezier(.2,.7,.2,1);
-    cursor: pointer;
-    border-radius: 10px;
-  }
-  .card.flipped { transform: rotateY(180deg); }
-  .card:focus-visible { outline: 2px solid var(--foil); outline-offset: 6px; }
-
-  .face {
-    position: absolute; inset: 0;
-    border-radius: 10px;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    background:
-      radial-gradient(120% 90% at 0% 0%, rgba(255,255,255,.07), transparent 60%),
-      var(--card);
-    color: var(--on-card);
-    box-shadow: 0 1px 0 var(--card-edge), 0 18px 40px -18px rgba(5,20,28,.55), 0 4px 10px -4px rgba(5,20,28,.35);
-    overflow: hidden;
-  }
-  .foil {
-    background: linear-gradient(105deg, var(--foil) 20%, var(--foil-hi) 45%, var(--foil) 70%);
-    background-size: 220% 100%;
-    -webkit-background-clip: text; background-clip: text;
-    color: transparent;
-    animation: sheen 6s ease-in-out infinite;
-  }
-  @keyframes sheen { 0%,100% { background-position: 100% 0 } 50% { background-position: 0 0 } }
-
-  .front {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    padding: 7% 8%;
+    min-height: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    padding-block: max(48px, env(safe-area-inset-top, 0px)) max(40px, env(safe-area-inset-bottom, 0px));
+    padding-left: max(24px, env(safe-area-inset-left, 0px));
+    padding-right: max(24px, env(safe-area-inset-right, 0px));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
   }
   .mono {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(22px, 6vw, 30px);
-    line-height: 1;
-    width: 1.9em; height: 1.9em;
+    width: 64px; height: 64px;
     display: grid; place-items: center;
-    border: 1px solid color-mix(in srgb, var(--foil) 70%, transparent);
+    border: 1px solid var(--foil);
     border-radius: 50%;
+    font: italic 500 28px/1 var(--font-display);
+    color: var(--foil);
   }
-  .name {
-    align-self: end;
-    font-family: var(--font-display);
-    font-weight: 500;
-    font-size: clamp(28px, 8.5vw, 46px);
-    letter-spacing: .01em;
-    line-height: 1.05;
-    margin: 0;
-    text-wrap: balance;
-  }
-  .rule { height: 1px; background: color-mix(in srgb, var(--foil) 55%, transparent); margin: 4% 0 3%; }
-  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-  .label {
-    font-size: clamp(9px, 2.2vw, 11px);
-    text-transform: uppercase;
-    letter-spacing: .22em;
-    color: color-mix(in srgb, var(--on-card) 70%, transparent);
+  h1 {
+    font: 500 clamp(40px, 12vw, 56px)/1.05 var(--font-display);
+    margin: 20px 0 10px;
+    color: var(--foil);
   }
   .num {
-    font-family: var(--font-mono);
-    font-size: clamp(15px, 4.4vw, 21px);
-    letter-spacing: .06em;
-    color: var(--on-card);
-    text-decoration: none;
+    font-size: 18px;
+    letter-spacing: .08em;
+    color: var(--muted);
     font-variant-numeric: tabular-nums;
-    user-select: all;
   }
-
-  .back {
-    transform: rotateY(180deg);
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 7%;
-    padding: 7% 8%;
-  }
-  .qr {
-    background: #f6f3ea;
-    padding: 8px;
-    border-radius: 6px;
-    width: clamp(96px, 30vw, 150px);
-    aspect-ratio: 1;
-  }
-  .qr img, .qr canvas { width: 100% !important; height: auto !important; display: block; }
-  .back-copy { display: grid; gap: 8px; min-width: 0; }
-  .back-copy .big { font-family: var(--font-display); font-style: italic; font-size: clamp(20px, 5.5vw, 30px); line-height: 1.1; }
-
-  .actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; width: min(520px, 100%); }
+  .buttons { display: grid; gap: 14px; }
   .btn {
-    font: 600 14px/1 var(--font-body);
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 12px 18px;
-    border-radius: 999px;
-    border: 1px solid var(--btn-line);
-    background: var(--btn);
-    color: var(--desk-ink);
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    padding: 20px;
+    border-radius: 16px;
+    font: 700 19px/1 var(--font-body);
     text-decoration: none;
-    cursor: pointer;
-    transition: border-color .2s, transform .2s;
+    transition: transform .15s;
   }
-  .btn:hover { border-color: var(--foil); transform: translateY(-1px); }
-  .btn:focus-visible { outline: 2px solid var(--foil); outline-offset: 2px; }
-  .btn.primary { background: var(--card); color: var(--on-card); border-color: var(--card); }
-  .btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-
-  .hint { font-size: 12px; color: var(--muted); letter-spacing: .04em; text-align: center; margin: 0; }
-  .toast { font-size: 13px; color: var(--muted); min-height: 1.2em; margin: -14px 0 0; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .card { transition: none; }
-    .foil { animation: none; }
-    .btn { transition: none; }
-  }
+  .btn:active { transform: scale(.98); }
+  .btn:focus-visible { outline: 3px solid var(--fg); outline-offset: 3px; }
+  .btn svg { width: 24px; height: 24px; }
+  .call { background: var(--call); color: var(--call-ink); }
+  .wa { background: var(--wa); color: var(--wa-ink); }
+  @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
 </style>
-
 </head>
 <body>
 <main>
-  <div class="stage">
-    <div class="card" id="card" role="button" tabindex="0" aria-label="Business card. Press to flip.">
-      <section class="face front" aria-label="Front">
-        <div class="mono foil" aria-hidden="true">MS</div>
-        <h1 class="name foil">Moh Saleh</h1>
-        <div>
-          <div class="rule"></div>
-          <div class="row">
-            <span class="label">Mobile</span>
-            <a class="num" href="tel:0796138006" id="num-link">079 613 8006</a>
-          </div>
-        </div>
-      </section>
-      <section class="face back" aria-label="Back">
-        <div class="qr" id="qr" aria-label="QR code that dials 079 613 8006"></div>
-        <div class="back-copy">
-          <span class="label">Scan to call</span>
-          <span class="big foil">Let's talk.</span>
-          <span class="num">079 613 8006</span>
-        </div>
-      </section>
-    </div>
-  </div>
-
-  <div class="actions">
-    <a class="btn primary" href="tel:0796138006">
-      <svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
-      Call
+  <header>
+    <div class="mono" aria-hidden="true">MS</div>
+    <h1>Moh Saleh</h1>
+    <div class="num">079 613 8006</div>
+  </header>
+  <div class="buttons">
+    <a class="btn call" href="tel:+962796138006">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+      Call me
     </a>
-    <a class="btn" href="https://wa.me/962796138006" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24"><path d="M3 21l1.7-5A9 9 0 1 1 8 19.3z"/></svg>
-      WhatsApp
+    <a class="btn wa" href="https://wa.me/962796138006">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
+      WhatsApp me
     </a>
-    <button class="btn" id="copy" type="button">
-      <svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-      Copy number
-    </button>
-    <button class="btn" id="flip" type="button">
-      <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3M20 4v4h-4M20 12a8 8 0 0 1-14 5.3M4 20v-4h4"/></svg>
-      Flip card
-    </button>
   </div>
-  <p class="toast" id="toast" aria-live="polite"></p>
-  <p class="hint">Standard card · 89 × 51 mm · tap the card to flip</p>
 </main>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script>
-  const card = document.getElementById('card');
-  const flip = () => card.classList.toggle('flipped');
-  card.addEventListener('click', e => { if (!e.target.closest('a')) flip(); });
-  card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
-  document.getElementById('flip').addEventListener('click', flip);
-
-  try {
-    new QRCode(document.getElementById('qr'), {
-      text: 'tel:0796138006', width: 256, height: 256,
-      colorDark: '#11303b', colorLight: '#f6f3ea', correctLevel: QRCode.CorrectLevel.M
-    });
-  } catch (e) {}
-
-  const toast = document.getElementById('toast');
-  document.getElementById('copy').addEventListener('click', () => {
-    const done = () => { toast.textContent = 'Number copied'; };
-    const fallback = () => {
-      const r = document.createRange();
-      r.selectNodeContents(document.getElementById('num-link'));
-      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
-      toast.textContent = 'Number selected. Press Ctrl+C or ⌘C to copy.';
-    };
-    try { navigator.clipboard.writeText('0796138006').then(done, fallback); } catch (e) { fallback(); }
-  });
-</script>
-
 </body>
 </html>
